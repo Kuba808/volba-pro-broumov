@@ -1,0 +1,396 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const petitionFile = '/Petiční arch - na výšku.docx';
+---
+<Layout>
+
+  <!-- ═══════════════════════════════ HEADER ═════════════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo-link" aria-label="Volba pro Broumov — domů">
+        <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="logo" width="220" height="77" />
+      </a>
+      <p class="header-tagline">Sdružení nezávislých kandidátů</p>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════ MAIN CONTENT ══════════════════════════ -->
+  <main>
+
+    <!-- ─── Hero / Dopis voličům ─── -->
+    <section class="section section--letter" id="dopis">
+      <div class="container">
+
+        <div class="letter-card">
+          <div class="letter-label">Dopis voličům</div>
+
+          <h1 class="letter-greeting">Milí Broumováci,</h1>
+
+          <div class="letter-body">
+            <p>
+              v říjnu tohoto roku proběhnou volby do zastupitelstva našeho města.
+            </p>
+            <p>
+              Po volbách v roce 2022, kdy jsme se ocitli v opozici, jsem zvažoval, zda ještě vůbec
+              někdy kandidovat. V mezidobí se však na mne obrátila řada Broumováků, ať to ještě
+              zkusíme. V letech 2014 – 2022 jsme předvedli, že realizace našeho konceptu
+              <strong>„nulové tolerance"</strong> vedla ke zvýšení bezpečnosti a pocitu pohody
+              v našem městě a pokračování tohoto konceptu je aktuální i v současnosti.
+            </p>
+            <p>
+              V předchozím období jsme vymýtili hazardní automaty, vykoupili několik problémových
+              nemovitostí a proměnili je v bydlení a prostory pro slušné lidi, přijali jsme
+              opatření proti přílivu problematických osob, došlo i ke snížení trestné činnosti.
+            </p>
+            <p>
+              Mojí motivací do těchto voleb je pokračovat v práci na tomto našem konceptu
+              <strong>„nulové tolerance"</strong>.
+            </p>
+            <p>
+              Kandidátku do nadcházejících voleb mohou podávat zavedené strany, případně je
+              možnost podat nezávislou kandidátku. Rozhodli jsme se pro druhou možnost. Kandidátka
+              pod hlavičkou zavedené strany je sice pohodlnější a jednodušší cesta. Já ale nechci,
+              aby naše kandidátka byla jakkoliv spojována s aktuálním děním na české politické scéně.
+            </p>
+            <p>
+              Taková kandidatura však obnáší práci. Pro registraci naší nezávislé kandidátky musíme
+              zajistit potřebný počet podpisů na petici. <strong>Podpisem na této petici se nikdo
+              nezavazuje k tomu, že nás bude volit.</strong> Petice nejsou volby. Pouze nám
+              umožníte, že můžeme kandidovat jako sdružení nezávislých kandidátů. Teprve říjnové
+              volby rozhodnou o tom, kdo a jak bude spravovat naše město.
+            </p>
+            <p>
+              V brzké době budete možná osloveni některým naším příznivcem k podpisu petice.
+              Nemějte obavy, k ničemu Vás podpis na petici nezavazuje. Podpisem nám dáte jen šanci
+              utkat se ve volbách s ostatními kandidáty.
+            </p>
+            <p>
+              Pokud nás chcete podpořit, petici si můžete stáhnout na
+              <strong>www.volbaprobroumov.info</strong>, nebo ji přijít podepsat osobně na naše
+              petiční místo – <strong>prodejna AnalogStore na náměstí v přízemí budovy Café
+              Herzog</strong>. Zde jsou k dispozici petiční archy a stejně tak zde můžete odevzdat
+              i Vaše podepsané petiční archy, případně nám zanechat vzkaz a podněty, co byste si
+              přáli v našem městě změnit nebo vylepšit.
+            </p>
+          </div>
+
+          <div class="letter-closing">
+            <div class="letter-signature">
+              <div class="letter-signature-text">
+                <p>Děkujeme a jsme s pozdravem.</p>
+                <p class="letter-signature-org">Za Volbu pro Broumov</p>
+                <p class="letter-signature-name">Ing. Jaroslav Bitnar</p>
+              </div>
+              <img src="/Jaroslav_Bitnar.png" alt="Ing. Jaroslav Bitnar" class="letter-signature-photo" width="100" height="auto" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── CTA — Petice ─── -->
+    <section class="section section--petition" id="petice">
+      <div class="container container--narrow">
+        <div class="petition-block">
+          <div class="petition-icon">📄</div>
+          <h2 class="petition-title">Stáhněte si petiční arch</h2>
+          <p class="petition-desc">
+            Vytiskněte, podepište a odevzdejte v prodejně AnalogStore na náměstí.<br />
+            Podpisem petice nám dáváte šanci kandidovat — k ničemu dalšímu se nezavazujete.
+          </p>
+          <a
+            href={petitionFile}
+            download
+            class="btn-download"
+            id="btn-stahnout-petici"
+            aria-label="Stáhnout petiční arch ve formátu Word"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Stáhnout petiční arch (.docx)
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="footer-logo" width="140" height="49" />
+      <p class="footer-text">
+        Sdružení nezávislých kandidátů · Broumov · 2026
+      </p>
+      <p class="footer-text footer-text--small">
+        <a href="mailto:info@volbaprobroumov.info">info@volbaprobroumov.info</a>
+      </p>
+    </div>
+  </footer>
+
+</Layout>
+
+<style>
+  /* ─── Container ─── */
+  .container {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  .container--narrow {
+    max-width: 600px;
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    background: var(--color-primary);
+    padding: 1.5rem 0 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,44,81,0.18);
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .logo-link {
+    flex-shrink: 0;
+  }
+  .logo {
+    height: 52px;
+    width: auto;
+    filter: brightness(0) invert(1); /* make white on dark bg */
+  }
+  .header-tagline {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 4rem 0;
+  }
+
+  /* ─── LETTER CARD ─── */
+  .section--letter {
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+  }
+  .letter-card {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 3rem 3.5rem;
+    border-top: 5px solid var(--color-primary);
+    animation: fadeUp 0.6s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .letter-label {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3em 0.9em;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .letter-greeting {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .letter-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+  .letter-body p {
+    text-align: justify;
+  }
+  .letter-body strong {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .letter-closing {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.97rem;
+  }
+  .letter-signature {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .letter-signature-text p {
+    line-height: 1.6;
+  }
+  .letter-signature-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-bg);
+    box-shadow: 0 4px 12px rgba(0, 44, 81, 0.15);
+  }
+  .letter-signature-org {
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .letter-signature-name {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 1.05rem;
+    margin-top: 0.15rem;
+  }
+
+  /* ─── PETITION CTA ─── */
+  .section--petition {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+  .petition-block {
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+  .petition-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .petition-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .petition-desc {
+    color: var(--color-secondary);
+    font-size: 0.97rem;
+    line-height: 1.65;
+    margin-bottom: 2rem;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    font-family: var(--font-base);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-btn);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+    text-decoration: none;
+  }
+  .btn-download:hover,
+  .btn-download:focus-visible {
+    background: transparent;
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
+  }
+  .btn-download:active {
+    transform: translateY(0);
+  }
+
+  /* ─── FOOTER ─── */
+  .site-footer {
+    background: var(--color-primary);
+    padding: 2rem 0;
+    text-align: center;
+  }
+  .footer-logo {
+    margin-inline: auto;
+    margin-bottom: 0.75rem;
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+  }
+  .footer-text {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .footer-text--small {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+  .footer-text a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .letter-card {
+      padding: 1.75rem 1.25rem;
+    }
+    .letter-greeting {
+      font-size: 1.5rem;
+    }
+    .site-header .container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .logo {
+      height: 40px;
+    }
+    .section {
+      padding: 2.5rem 0;
+    }
+    .petition-block {
+      padding: 2rem 1.25rem;
+    }
+    .btn-download {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      padding: 0.85rem 1rem;
+      white-space: normal;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .btn-download svg {
+      flex-shrink: 0;
+    }
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Volba pro Broumov',
+  description = 'Nezávislá kandidátka pro komunální volby v Broumově. Koncept nulové tolerance, bezpečné město, lepší Broumov.',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <title>{title}</title>
+
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ─── CSS Reset & Variables ─── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-primary:    #002C51;
+      --color-secondary:  #86ACCF;
+      --color-bg:         #F5F8FB;
+      --color-bg-card:    #FFFFFF;
+      --color-text:       #1A2A3A;
+      --color-text-muted: #4A6080;
+      --color-border:     #D0E0EE;
+
+      --font-base: 'Roboto', sans-serif;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+
+      --shadow-card: 0 4px 24px rgba(0, 44, 81, 0.10);
+      --shadow-btn:  0 2px 12px rgba(0, 44, 81, 0.20);
+
+      --transition: 0.25s ease;
+
+      --max-width: 760px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-base);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.75;
+      font-size: 1.05rem;
+      min-height: 100vh;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>
