@@ -2,20 +2,41 @@
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 const {
   title = 'Volba pro Broumov',
-  description = 'Nezávislá kandidátka pro komunální volby v Broumově. Koncept nulové tolerance, bezpečné město, lepší Broumov.',
+  description = 'Sdružení nezávislých kandidátů do komunálních voleb v Broumově. Podpořte náš koncept nulové tolerance a vytvořte s námi bezpečné město.',
+  image = '/Jaroslav_Bitnar.png',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.volbaprobroumov.info');
 ---
 <!DOCTYPE html>
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+
+  <!-- SEO & Nastavení -->
   <meta name="description" content={description} />
   <meta name="robots" content="index, follow" />
-  <title>{title}</title>
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site || 'https://www.volbaprobroumov.info')} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, Astro.site || 'https://www.volbaprobroumov.info')} />
 
   <!-- Google Fonts: Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
