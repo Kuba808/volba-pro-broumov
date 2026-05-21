@@ -8,7 +8,7 @@
 | `--color-secondary` | `#86ACCF` | Světle modrá — akcenty, linky, dekorace |
 | `--color-bg` | `#F5F8FB` | Pozadí stránky |
 | `--color-bg-card` | `#FFFFFF` | Pozadí karet/sekcí |
-| `--color-text` | `#1A2A3A` | Hlavní text |
+| `--color-text` | `#1A2A3A` | Hlavní texty |
 | `--color-text-muted` | `#4A6080` | Vedlejší text, popisky |
 | `--color-border` | `#D0E0EE` | Ohraničení prvků |
 
