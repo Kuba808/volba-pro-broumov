@@ -9,6 +9,17 @@ const postsCollection = defineCollection({
   }),
 });
 
+const candidatesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    order: z.number(),
+    name: z.string(),
+    photo: z.string(),
+    bio: z.string(),
+  }),
+});
+
 export const collections = {
   posts: postsCollection,
+  candidates: candidatesCollection,
 };
