@@ -7,13 +7,6 @@ const petitionFile = '/Petiční arch - na výšku.docx';
 const allPosts = await getCollection('posts');
 allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const posts = await Promise.all(
-  allPosts.map(async (post) => {
-    const { Content } = await post.render();
-    return { post, Content };
-  })
-);
-
 const allCandidates = await getCollection('candidates');
 allCandidates.sort((a, b) => a.data.order - b.data.order);
 
@@ -27,60 +20,38 @@ const candidates = await Promise.all(
 ---
 <Layout>
 
-  <!-- ═══════════════════════════════ HEADER ═════════════════════════════ -->
-  <header class="site-header">
+  <!-- ─── Hero / Dopis voličům ─── -->
+  <section class="section section--letter" id="dopis">
     <div class="container">
-      <a href="/" class="logo-link" aria-label="Volba pro Broumov — domů">
-        <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="logo" width="220" height="77" />
-      </a>
-      <nav class="site-nav" aria-label="Hlavní navigace">
-        <ul class="nav-list">
-          <li><a href="#dopis" class="nav-link">Dopis</a></li>
-          <li><a href="#kandidati" class="nav-link">Kandidáti</a></li>
-          <li><a href="#prispevky" class="nav-link">Příspěvky</a></li>
-          <li>
-            <a
-              href={petitionFile}
-              download
-              class="nav-link nav-link--petition"
-              aria-label="Stáhnout petiční arch ve formátu Word"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              <span>Petice</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <!-- ═══════════════════════════ MAIN CONTENT ══════════════════════════ -->
-  <main>
+      <div class="letter-card">
+        <div class="letter-label">Dopis voličům</div>
 
-    <!-- ─── Hero / Dopis voličům ─── -->
-    <section class="section section--letter" id="dopis">
-      <div class="container">
+        <h1 class="letter-greeting">Milí Broumováci,</h1>
 
-        <div class="letter-card">
-          <div class="letter-label">Dopis voličům</div>
+        <div class="letter-body">
+          <p>
+            v říjnu tohoto roku proběhnou volby do zastupitelstva našeho města.
+          </p>
+          <p>
+            Po volbách v roce 2022, kdy jsme se ocitli v opozici, jsem zvažoval, zda ještě vůbec
+            někdy kandidovat. V mezidobí se však na mne obrátila řada Broumováků, ať to ještě
+            zkusíme. V letech 2014 – 2022 jsme předvedli, že realizace našeho konceptu
+            <strong>„nulové tolerance"</strong> vedla ke zvýšení bezpečnosti a pocitu pohody
+            v našem městě a pokračování tohoto konceptu je aktuální i v současnosti.
+          </p>
+        </div>
 
-          <h1 class="letter-greeting">Milí Broumováci,</h1>
+        <details class="letter-details">
+          <summary class="letter-toggle">
+            <span class="letter-toggle-text letter-toggle-text--more">Číst celý dopis</span>
+            <span class="letter-toggle-text letter-toggle-text--less">Sbalit dopis</span>
+            <svg class="letter-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
 
-          <div class="letter-body">
-            <p>
-              v říjnu tohoto roku proběhnou volby do zastupitelstva našeho města.
-            </p>
-            <p>
-              Po volbách v roce 2022, kdy jsme se ocitli v opozici, jsem zvažoval, zda ještě vůbec
-              někdy kandidovat. V mezidobí se však na mne obrátila řada Broumováků, ať to ještě
-              zkusíme. V letech 2014 – 2022 jsme předvedli, že realizace našeho konceptu
-              <strong>„nulové tolerance"</strong> vedla ke zvýšení bezpečnosti a pocitu pohody
-              v našem městě a pokračování tohoto konceptu je aktuální i v současnosti.
-            </p>
+          <div class="letter-body letter-body--rest">
             <p>
               V předchozím období jsme vymýtili hazardní automaty, vykoupili několik problémových
               nemovitostí a proměnili je v bydlení a prostory pro slušné lidi, přijali jsme
@@ -128,134 +99,134 @@ const candidates = await Promise.all(
               <img src="/Jaroslav_Bitnar.png" alt="Ing. Jaroslav Bitnar" class="letter-signature-photo" width="100" height="auto" />
             </div>
           </div>
-        </div>
+        </details>
+      </div>
 
+    </div>
+  </section>
+
+  <!-- ─── Kandidáti ─── -->
+  {candidates.length > 0 && (
+    <section class="section section--candidates" id="kandidati">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title-custom">Kandidáti</h2>
+          <p class="section-subtitle">Lidé, kteří chtějí pracovat pro Broumov</p>
+        </div>
+        <div class="candidates-grid">
+          {candidates.map(({ candidate, Content, hasExtended }) => (
+            <article class="candidate-card">
+              <div class="candidate-photo-wrap">
+                <span class="candidate-number" aria-label={`Pořadí na kandidátce: ${candidate.data.order}`}>
+                  {candidate.data.order}
+                </span>
+                <img
+                  src={candidate.data.photo}
+                  alt={candidate.data.name}
+                  class="candidate-photo"
+                  width="140"
+                  height="140"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="candidate-name">{candidate.data.name}</h3>
+              <p class="candidate-bio">{candidate.data.bio}</p>
+              {hasExtended && (
+                <details class="candidate-details">
+                  <summary class="candidate-toggle">
+                    <span class="candidate-toggle-text candidate-toggle-text--more">Celý medailonek</span>
+                    <span class="candidate-toggle-text candidate-toggle-text--less">Skrýt medailonek</span>
+                    <svg class="candidate-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                  </summary>
+                  <div class="candidate-full">
+                    <Content />
+                  </div>
+                </details>
+              )}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
+  )}
 
-    <!-- ─── Kandidáti ─── -->
-    {candidates.length > 0 && (
-      <section class="section section--candidates" id="kandidati">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title-custom">Kandidáti</h2>
-            <p class="section-subtitle">Lidé, kteří chtějí pracovat pro Broumov</p>
-          </div>
-          <div class="candidates-grid">
-            {candidates.map(({ candidate, Content, hasExtended }) => (
-              <article class="candidate-card">
-                <div class="candidate-photo-wrap">
-                  <span class="candidate-number" aria-label={`Pořadí na kandidátce: ${candidate.data.order}`}>
-                    {candidate.data.order}
-                  </span>
-                  <img
-                    src={candidate.data.photo}
-                    alt={candidate.data.name}
-                    class="candidate-photo"
-                    width="140"
-                    height="140"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 class="candidate-name">{candidate.data.name}</h3>
-                <p class="candidate-bio">{candidate.data.bio}</p>
-                {hasExtended && (
-                  <details class="candidate-details">
-                    <summary class="candidate-toggle">
-                      <span class="candidate-toggle-text candidate-toggle-text--more">Celý medailonek</span>
-                      <span class="candidate-toggle-text candidate-toggle-text--less">Skrýt medailonek</span>
-                      <svg class="candidate-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="6 9 12 15 18 9"/>
-                      </svg>
-                    </summary>
-                    <div class="candidate-full">
-                      <Content />
-                    </div>
-                  </details>
-                )}
-              </article>
-            ))}
-          </div>
+  <!-- ─── Příspěvky / Aktuality ─── -->
+  {allPosts.length > 0 && (
+    <section class="section section--posts" id="prispevky">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title-custom">Příspěvky & Aktuality</h2>
+          <p class="section-subtitle">Co je u nás nového a na čem zrovna pracujeme</p>
         </div>
-      </section>
-    )}
-
-    <!-- ─── Příspěvky / Aktuality ─── -->
-    {posts.length > 0 && (
-      <section class="section section--posts" id="prispevky">
-        <div class="container">
-          <div class="section-header">
-            <h2 class="section-title-custom">Příspěvky & Aktuality</h2>
-            <p class="section-subtitle">Co je u nás nového a na čem zrovna pracujeme</p>
-          </div>
-          <div class="posts-feed">
-            {posts.map(({ post, Content }) => (
-              <article class="post-card">
+        <div class="posts-feed">
+          {allPosts.map((post) => {
+            const formattedDate = post.data.date.toLocaleDateString('cs-CZ', {
+              year: 'numeric', month: 'long', day: 'numeric',
+            });
+            return (
+              <a href={`/posts/${post.slug}`} class="post-card" aria-label={`Otevřít článek: ${post.data.title}`}>
                 {post.data.image && (
                   <div class="post-image-container">
-                    <img src={post.data.image} alt={post.data.title || "Obrázek k příspěvku"} class="post-image" loading="lazy" />
+                    <img src={post.data.image} alt={post.data.title} class="post-image" loading="lazy" />
                   </div>
                 )}
                 <div class="post-text-container">
-                  {post.data.title && <h3 class="post-card-title">{post.data.title}</h3>}
-                  <div class="post-body-content">
-                    <Content />
-                  </div>
+                  <time class="post-card-date" datetime={post.data.date.toISOString()}>
+                    {formattedDate}
+                  </time>
+                  <h3 class="post-card-title">{post.data.title}</h3>
+                  {post.data.excerpt && (
+                    <p class="post-card-excerpt">{post.data.excerpt}</p>
+                  )}
+                  <span class="post-card-readmore">
+                    Číst více
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                  </span>
                 </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
-
-    <!-- ─── CTA — Petice ─── -->
-    <section class="section section--petition" id="petice">
-      <div class="container container--narrow">
-        <div class="petition-block">
-          <div class="petition-icon">📄</div>
-          <h2 class="petition-title">Stáhněte si petiční arch</h2>
-          <p class="petition-desc">
-            Vytiskněte, podepište a odevzdejte v prodejně AnalogStore na náměstí.<br />
-            Podpisem petice nám dáváte šanci kandidovat — k ničemu dalšímu se nezavazujete.
-          </p>
-          <a
-            href={petitionFile}
-            download
-            class="btn-download"
-            id="btn-stahnout-petici"
-            aria-label="Stáhnout petiční arch ve formátu Word"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Stáhnout petiční arch (.docx)
-          </a>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
+  )}
 
-  </main>
-
-  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container">
-      <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="footer-logo" width="140" height="49" />
-      <p class="footer-text">
-        Sdružení nezávislých kandidátů · Broumov · 2026
-      </p>
-      <p class="footer-text footer-text--small">
-        <a href="mailto:jaroslav.bitnar@gmail.com">jaroslav.bitnar@gmail.com</a>
-      </p>
+  <!-- ─── CTA — Petice ─── -->
+  <section class="section section--petition" id="petice">
+    <div class="container container--narrow">
+      <div class="petition-block">
+        <div class="petition-icon">📄</div>
+        <h2 class="petition-title">Stáhněte si petiční arch</h2>
+        <p class="petition-desc">
+          Vytiskněte, podepište a odevzdejte v prodejně AnalogStore na náměstí.<br />
+          Podpisem petice nám dáváte šanci kandidovat — k ničemu dalšímu se nezavazujete.
+        </p>
+        <a
+          href={petitionFile}
+          download
+          class="btn-download"
+          id="btn-stahnout-petici"
+          aria-label="Stáhnout petiční arch ve formátu Word"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Stáhnout petiční arch (.docx)
+        </a>
+      </div>
     </div>
-  </footer>
+  </section>
 
 </Layout>
 
 <style>
-  /* ─── Container ─── */
+  /* ─── Container (scoped per-page) ─── */
   .container {
     max-width: var(--max-width);
     margin-inline: auto;
@@ -263,71 +234,6 @@ const candidates = await Promise.all(
   }
   .container--narrow {
     max-width: 600px;
-  }
-
-  /* ─── HEADER ─── */
-  .site-header {
-    background: var(--color-primary);
-    padding: 1.5rem 0 1.25rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 16px rgba(0,44,81,0.18);
-  }
-  .site-header .container {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .logo-link {
-    flex-shrink: 0;
-  }
-  .logo {
-    height: 52px;
-    width: auto;
-    filter: brightness(0) invert(1); /* make white on dark bg */
-  }
-  .site-nav {
-    margin-left: auto;
-  }
-  .nav-list {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--color-secondary);
-    font-size: 0.92rem;
-    font-weight: 600;
-    padding: 0.5rem 0.85rem;
-    border-radius: 100px;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: background var(--transition), color var(--transition), border-color var(--transition);
-    white-space: nowrap;
-  }
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-  }
-  .nav-link--petition {
-    background: var(--color-secondary);
-    color: var(--color-primary);
-    font-weight: 700;
-  }
-  .nav-link--petition:hover,
-  .nav-link--petition:focus-visible {
-    background: transparent;
-    color: var(--color-secondary);
-    border-color: var(--color-secondary);
   }
 
   /* ─── SECTIONS ─── */
@@ -388,6 +294,82 @@ const candidates = await Promise.all(
   .letter-body strong {
     color: var(--color-primary);
     font-weight: 700;
+  }
+
+  /* intro fade teaser when collapsed */
+  .letter-card > .letter-body {
+    position: relative;
+  }
+  .letter-card:has(.letter-details:not([open])) > .letter-body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.5rem;
+    height: 4rem;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--color-bg-card));
+    pointer-events: none;
+  }
+
+  /* collapsible rest */
+  .letter-details[open] {
+    display: flex;
+    flex-direction: column;
+  }
+  .letter-body--rest {
+    margin-top: 1.25rem;
+    animation: fadeUp 0.35s ease both;
+  }
+  /* when open, move toggle below revealed text */
+  .letter-details[open] .letter-toggle {
+    order: 2;
+    margin-top: 1.5rem;
+  }
+  .letter-details[open] .letter-closing {
+    order: 1;
+  }
+
+  /* toggle button */
+  .letter-toggle {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-bg);
+    transition: background var(--transition), border-color var(--transition);
+    user-select: none;
+  }
+  .letter-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .letter-toggle:hover,
+  .letter-toggle:focus-visible {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+  .letter-toggle-icon {
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+  .letter-details[open] .letter-toggle-icon {
+    transform: rotate(180deg);
+  }
+  .letter-toggle-text--less {
+    display: none;
+  }
+  .letter-details[open] .letter-toggle-text--more {
+    display: none;
+  }
+  .letter-details[open] .letter-toggle-text--less {
+    display: inline;
   }
 
   .letter-closing {
@@ -485,34 +467,6 @@ const candidates = await Promise.all(
     transform: translateY(0);
   }
 
-  /* ─── FOOTER ─── */
-  .site-footer {
-    background: var(--color-primary);
-    padding: 2rem 0;
-    text-align: center;
-  }
-  .footer-logo {
-    margin-inline: auto;
-    margin-bottom: 0.75rem;
-    height: 40px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.8;
-  }
-  .footer-text {
-    color: var(--color-secondary);
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-  .footer-text--small {
-    font-size: 0.8rem;
-    opacity: 0.7;
-  }
-  .footer-text a {
-    color: inherit;
-    text-decoration: underline;
-  }
-
   /* ─── POSTS SECTION ─── */
   .section--posts {
     background: var(--color-bg);
@@ -566,10 +520,17 @@ const candidates = await Promise.all(
     overflow: hidden;
     transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
     border-left: 5px solid var(--color-secondary);
+    color: inherit;
+    text-decoration: none;
   }
-  .post-card:hover {
+  .post-card:hover,
+  .post-card:focus-visible {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 44, 81, 0.15);
+  }
+  .post-card:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .post-image-container {
@@ -590,34 +551,48 @@ const candidates = await Promise.all(
 
   .post-text-container {
     flex: 1;
-    padding: 2.5rem;
+    padding: 2.25rem 2.25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .post-card-date {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .post-card-title {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 1rem;
     line-height: 1.3;
   }
 
-  .post-body-content {
+  .post-card-excerpt {
     color: var(--color-text);
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 0.97rem;
+    line-height: 1.6;
   }
-  .post-body-content p {
-    margin-bottom: 0.85rem;
-    text-align: justify;
-  }
-  .post-body-content p:last-child {
-    margin-bottom: 0;
-  }
-  .post-body-content strong {
+
+  .post-card-readmore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
     color: var(--color-primary);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .post-card-readmore svg {
+    transition: transform var(--transition);
+  }
+  .post-card:hover .post-card-readmore svg {
+    transform: translateX(3px);
   }
 
   /* Responsive layout for posts */
@@ -632,14 +607,10 @@ const candidates = await Promise.all(
       height: 240px;
     }
     .post-text-container {
-      padding: 1.75rem 1.25rem;
+      padding: 1.5rem 1.25rem;
     }
     .post-card-title {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-    .post-body-content p {
-      text-align: left;
+      font-size: 1.2rem;
     }
   }
 
@@ -651,19 +622,9 @@ const candidates = await Promise.all(
   }
   .candidates-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 640px) {
-    .candidates-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 960px) {
-    .candidates-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.75rem;
-    }
+    grid-template-columns: repeat(auto-fit, minmax(300px, 460px));
+    gap: 1.75rem;
+    justify-content: center;
   }
 
   .candidate-card {
@@ -735,6 +696,15 @@ const candidates = await Promise.all(
     width: 100%;
     margin-top: 1rem;
   }
+  .candidate-details[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .candidate-details[open] .candidate-toggle {
+    order: 2;
+    margin-top: 1.25rem;
+  }
   .candidate-details[open] .candidate-toggle-icon {
     transform: rotate(180deg);
   }
@@ -804,43 +774,6 @@ const candidates = await Promise.all(
     }
     .letter-greeting {
       font-size: 1.5rem;
-    }
-    .site-header {
-      padding: 0.55rem 0;
-    }
-    .site-header .container {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.5rem;
-      padding-inline: 0.75rem;
-    }
-    .logo-link {
-      align-self: center;
-    }
-    .logo {
-      height: 30px;
-    }
-    .site-nav {
-      margin-left: 0;
-    }
-    .nav-list {
-      justify-content: space-between;
-      gap: 0.2rem;
-    }
-    .nav-link {
-      padding: 0.4rem 0.6rem;
-      font-size: 0.82rem;
-      gap: 0.3rem;
-    }
-    .nav-link--petition svg {
-      width: 14px;
-      height: 14px;
-    }
-  }
-  @media (max-width: 380px) {
-    .nav-link {
-      padding: 0.4rem 0.5rem;
-      font-size: 0.78rem;
     }
     .section {
       padding: 2.5rem 0;

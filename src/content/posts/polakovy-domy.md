@@ -2,6 +2,7 @@
 title: "Boj proti obchodu s chudobou a situace v Polákových domech"
 date: 2026-05-21
 image: "/posts/polakovi.jpg"
+excerpt: "V letech 2018–2022 jsme vyhlásili v problémových lokalitách bezdoplatkové zóny. Ústavní soud je v roce 2021 zrušil. Dnes máme novou možnost, jak omezit obchod s chudobou — pomocí koeficientu daně z nemovitosti."
 ---
 
 V našem volebním období 2018 – 2022 jsme vyhlásili v některých problémových lokalitách Broumova tzv. „bezdoplatkové zóny“. Jednalo se o oblasti se zvýšeným výskytem sociálně nežádoucích jevů, jak to bylo definováno v zákoně. Cílem bylo omezit navyšování počtu obyvatel v těchto lokalitách, například v Polákových domech.

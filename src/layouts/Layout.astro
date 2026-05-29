@@ -11,6 +11,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.volbaprobroumov.info');
+const petitionFile = '/Petiční arch - na výšku.docx';
 ---
 <!DOCTYPE html>
 <html lang="cs">
@@ -89,6 +90,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.volb
       line-height: 1.75;
       font-size: 1.05rem;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
     }
 
     img, svg {
@@ -100,9 +107,201 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://www.volb
       color: var(--color-primary);
       text-decoration: none;
     }
+
+    /* ─── Container ─── */
+    .container {
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+    .container--narrow {
+      max-width: 600px;
+    }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      background: var(--color-primary);
+      padding: 1.5rem 0 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,44,81,0.18);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .logo-link {
+      flex-shrink: 0;
+    }
+    .logo {
+      height: 52px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .site-nav {
+      margin-left: auto;
+    }
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--color-secondary);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .nav-link--petition {
+      background: var(--color-secondary);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    .nav-link--petition:hover,
+    .nav-link--petition:focus-visible {
+      background: transparent;
+      color: var(--color-secondary);
+      border-color: var(--color-secondary);
+    }
+
+    /* ─── FOOTER ─── */
+    .site-footer {
+      background: var(--color-primary);
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .footer-logo {
+      margin-inline: auto;
+      margin-bottom: 0.75rem;
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+    }
+    .footer-text {
+      color: var(--color-secondary);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .footer-text--small {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    .footer-text a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    /* ─── HEADER/FOOTER RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .site-header {
+        padding: 0.55rem 0;
+      }
+      .site-header .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding-inline: 0.75rem;
+      }
+      .logo-link {
+        align-self: center;
+      }
+      .logo {
+        height: 30px;
+      }
+      .site-nav {
+        margin-left: 0;
+      }
+      .nav-list {
+        justify-content: space-between;
+        gap: 0.2rem;
+      }
+      .nav-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.82rem;
+        gap: 0.3rem;
+      }
+      .nav-link--petition svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    @media (max-width: 380px) {
+      .nav-link {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.78rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <slot />
+
+  <!-- ═══════════════════════════════ HEADER ═════════════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo-link" aria-label="Volba pro Broumov — domů">
+        <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="logo" width="220" height="77" />
+      </a>
+      <nav class="site-nav" aria-label="Hlavní navigace">
+        <ul class="nav-list">
+          <li><a href="/#dopis" class="nav-link">Dopis</a></li>
+          <li><a href="/#kandidati" class="nav-link">Kandidáti</a></li>
+          <li><a href="/#prispevky" class="nav-link">Příspěvky</a></li>
+          <li>
+            <a
+              href={petitionFile}
+              download
+              class="nav-link nav-link--petition"
+              aria-label="Stáhnout petiční arch ve formátu Word"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Petice</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <img src="/VPB_logo.svg" alt="Volba pro Broumov" class="footer-logo" width="140" height="49" />
+      <p class="footer-text">
+        Sdružení nezávislých kandidátů · Broumov · 2026
+      </p>
+      <p class="footer-text footer-text--small">
+        <a href="mailto:jaroslav.bitnar@gmail.com">jaroslav.bitnar@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
 </body>
 </html>
