@@ -16,6 +16,8 @@ const candidatesCollection = defineCollection({
     order: z.number(),
     name: z.string(),
     photo: z.string(),
+    age: z.number().optional(),
+    position: z.string().optional(),
     bio: z.string(),
   }),
 });

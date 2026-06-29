@@ -130,6 +130,13 @@ const candidates = await Promise.all(
                 />
               </div>
               <h3 class="candidate-name">{candidate.data.name}</h3>
+              {(candidate.data.position || candidate.data.age) && (
+                <p class="candidate-meta">
+                  {candidate.data.position}
+                  {candidate.data.position && candidate.data.age && <span class="candidate-meta-sep">·</span>}
+                  {candidate.data.age && `${candidate.data.age} let`}
+                </p>
+              )}
               <p class="candidate-bio">{candidate.data.bio}</p>
               {hasExtended && (
                 <details class="candidate-details">
@@ -681,8 +688,19 @@ const candidates = await Promise.all(
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-primary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.35rem;
     line-height: 1.3;
+  }
+  .candidate-meta {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 0.85rem;
+    letter-spacing: 0.01em;
+  }
+  .candidate-meta-sep {
+    margin-inline: 0.45rem;
+    opacity: 0.6;
   }
 
   .candidate-bio {

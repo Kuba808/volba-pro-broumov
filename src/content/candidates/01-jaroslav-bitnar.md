@@ -2,6 +2,8 @@
 order: 1
 name: "Jaroslav Bitnar"
 photo: "/Jaroslav_Bitnar.png"
+age: 56
+position: "Prodejce ve společnosti Hobra"
 bio: "V období mezi léty 2014–2022 jsem jako starosta držel linii „nulové tolerance“. Zákazem výherních automatů, prosazením opatření proti přílivu problematických osob, výkupem problematických nemovitostí a obnovou bytového fondu jsme dali jasně najevo, že to myslíme vážně a že reálně dokážeme z Broumova udělat lepší místo pro život."
 ---
 
