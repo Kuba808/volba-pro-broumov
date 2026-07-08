@@ -2,6 +2,7 @@
 title: "Také Vás trápí nedostatek míst pro ukládání tříděného odpadu?"
 date: 2026-07-08
 image: "/posts/sut.jpg"
+excerpt: "Z většiny stanovišť zmizely kontejnery na papír a plast a skončilo bezplatné ukládání stavební suti. Úspora města se přenáší na občany a hrozí černé skládky. Chceme zrušená stanoviště obnovit a třídění opět usnadnit."
 ---
 
 Již je to delší čas, co z většiny míst určených pro odkládání tříděného odpadu zmizely kontejnery na papír a plast. Mělo to přinést snížení nákladů na svoz odpadu. Výsledkem těchto opuštěných stanovišť je to, že někteří poctiví z nás to vozíme na sběrný dvůr do Tyršovy ulice. A někteří to nacpou do směsného odpadu a město tak zaplatí o to více.
