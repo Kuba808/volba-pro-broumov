@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.volbaprobroumov.info/sitemap-index.xml
