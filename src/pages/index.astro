@@ -17,6 +17,34 @@ const candidates = await Promise.all(
     return { candidate, Content, hasExtended };
   })
 );
+
+// Plná kandidátní listina — pořadí = pozice na hlasovacím lístku.
+// Editace: přidej / uprav jméno, číslování se dopočítá automaticky.
+const ballotList = [
+  'Bitnar Jaroslav',
+  'Biško Miloš',
+  'Kašpar Pavel',
+  'Zelená Natálie',
+  'Rojkovič Jaroslav',
+  'Valentová Jana',
+  'Čihák Jakub',
+  'Martinec Jiří',
+  'Brandová Zuzana',
+  'Vančura František',
+  'Hanzlík Ladislav',
+  'Lanc Miroslav',
+  'Sedláková Jana',
+  'Lanta Vojtěch',
+  'Rýdl Josef',
+  'Prázová Blanka',
+  'Otradovská Darina',
+  'Effenberková Kristýna',
+  'Zinke Ondřej',
+  'Vítková Věra',
+  'Středová Andrea',
+  'Röselová Jana',
+  'Kolářová Renata',
+];
 ---
 <Layout>
 
@@ -155,6 +183,38 @@ const candidates = await Promise.all(
             </article>
           ))}
         </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Kandidátní listina ─── -->
+  {ballotList.length > 0 && (
+    <section class="section section--ballot" id="kandidatka">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title-custom">Kandidátní listina</h2>
+          <p class="section-subtitle">Kompletní pořadí kandidátů na hlasovacím lístku</p>
+        </div>
+        <ol class="ballot-list" aria-label="Kandidátní listina Volba pro Broumov">
+          {ballotList.map((name, i) => (
+            <li class="ballot-item">
+              <span class="ballot-number">{i + 1}</span>
+              <span class="ballot-name">{name}</span>
+            </li>
+          ))}
+        </ol>
+        <script type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: 'Kandidátní listina — Volba pro Broumov',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: ballotList.length,
+          itemListElement: ballotList.map((name, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: { '@type': 'Person', name },
+          })),
+        })} />
       </div>
     </section>
   )}
@@ -782,6 +842,70 @@ const candidates = await Promise.all(
     margin-bottom: 0;
   }
   .candidate-full strong {
+    color: var(--color-primary);
+  }
+
+  /* ─── BALLOT LIST (kandidátní listina) ─── */
+  .section--ballot {
+    background: var(--color-bg);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .ballot-list {
+    max-width: var(--max-width-reading);
+    margin-inline: auto;
+    list-style: none;
+    padding: 0.5rem;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  @media (min-width: 560px) {
+    .ballot-list {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 0.75rem;
+    }
+  }
+  .ballot-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-md);
+    transition: background var(--transition);
+  }
+  .ballot-item:hover {
+    background: var(--color-bg);
+  }
+  .ballot-number {
+    flex-shrink: 0;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 50%;
+  }
+  .ballot-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  /* lídr kandidátky zvýrazněn */
+  .ballot-item:first-child .ballot-number {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+  }
+  .ballot-item:first-child .ballot-name {
+    font-weight: 700;
     color: var(--color-primary);
   }
 
