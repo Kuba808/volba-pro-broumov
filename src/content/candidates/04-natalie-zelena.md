@@ -2,6 +2,8 @@
 order: 4
 name: "Natálie Zelená"
 photo: "/Natalie_Zelena.png"
+age: 27
+position: "Podnikatelka www.pradelnasen.cz"
 bio: "Kandiduji do zastupitelstva za Volbu pro Broumov, protože jako zdejší obyvatel i podnikatel chci zúročit své zkušenosti a zlepšit život všem generacím v našem městě. Mým cílem je prosadit hospodárnou správu města se zaměřením na dostupné bydlení, bezpečnost, podporu podnikání, kvalitnější dopravu a dostupnější zdravotní péči."
 ---
 
