@@ -10,10 +10,3 @@ Ve středu 16. září proběhla v broumovském Íčku diskuze lídrů volebníc
 Celý příspěvek s podrobnostmi a konkrétními čísly k výprodeji nemovitostí v Olivětíně a Polákových domech najdete na našem facebookovém profilu:
 
 👉 [Přečíst celý příspěvek na Facebooku](https://www.facebook.com/share/p/19Dw6vEUcm/)
-
-Na téma Polákových domů vznikla i rapová píseň — poslechněte si ji zde:
-
-<audio controls controlsList="nodownload noplaybackrate" oncontextmenu="return false;" style="width:100%;">
-  <source src="/posts/audio.mpeg" type="audio/mpeg" />
-  Váš prohlížeč nepodporuje přehrávání audia.
-</audio>
